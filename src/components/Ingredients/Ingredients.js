@@ -12,14 +12,18 @@ function Ingredients() {
       [...prevIngredients, {id: Math.random(), ...ingredient}]);
   }
 
+  // this method doesn't work but removeIngrientHandler does
   const removeItemHandler = ingredientId => {
     setUserIngredients(prevIngredients => {
-        const list = [...prevIngredients];
-        console.log('before splice: '+list);
-        list.splice(ingredientId, 1);
-        console.log('after splice: '+list);
         [...prevIngredients].splice(ingredientId,1)});
   }
+
+  const removeIngredientHandler = ingredientId => {
+    //const filteredIngredients = userIngredients.filter(ingredient => ingredient.id !== ingredientId)
+    setUserIngredients(prevIngredients =>
+        prevIngredients.filter(ingredient =>
+            ingredient.id !== ingredientId))
+}
 
   return (
     <div className="App">
@@ -27,7 +31,7 @@ function Ingredients() {
 
       <section>
         <Search />
-        <IngredientList ingredients={userIngredients} onRemoveItem={id=>{removeItemHandler(id)}}/>
+        <IngredientList ingredients={userIngredients} onRemoveItem={id=>{removeIngredientHandler(id)}}/>
       </section>
     </div>
   );
